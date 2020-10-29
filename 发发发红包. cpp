@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+int main(void)
+{
+    int M,N,K;
+    cin >> M >> N >> K;
+    int a[K][N];
+    for(int i = 0;i < K;i++)
+    {
+        for(int j = 0;j < N;j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+    for(int i = 0;i < K;i++)
+    {
+        int flag = 1;
+        int flag2 = 1;
+        for(int j = 0;j < N-1;j++)
+        {
+            if((a[i][j])-j > M)//判断是否超过栈的容量
+            {
+                flag = 0;
+                flag2 = 0;
+                break;
+            }
+            int t = j;//中间变量
+            int w = j +1;
+            while(w<N)
+            {
+                if(a[i][w] < a[i][j]&&a[i][w] < a[i][t])
+                {
+                    t = w;
+                    w++;
+                    continue;
+                }
+                else if(a[i][w] < a[i][j]&&a[i][w] > a[i][t])
+                {
+                    flag = 0;
+                    flag2 = 0;
+                    break;
+                }
+                w++;
+            }
+            if(!flag2)break;
+        }
+        if(i != K-1)
+        {
+            if(flag2&&flag)cout << "YES" << endl;
+            else cout << "NO" << endl;
+        }
+        else
+        {
+            if(flag2&&flag)cout << "YES";
+            else cout << "NO";
+        }
+    }
+ 
+ 
+    return 0;
+}
